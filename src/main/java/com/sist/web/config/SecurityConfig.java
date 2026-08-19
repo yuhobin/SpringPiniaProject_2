@@ -19,9 +19,9 @@ import com.sist.web.security.LoginSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 
-@Configuration
+/*@Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+@RequiredArgsConstructor*/
 /*
  * 	1. Spring Security
  * 		= 보안을 담당하는 프레임워크 
@@ -119,22 +119,17 @@ public class SecurityConfig {
 	 * 	
 	 */
 	// 인증 관리자
-	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder passwordEncoder) throws Exception {
-		return null;
-	}
-	@Bean
-	public JdbcUserDetailsManager jdbcUserDetailsManager() {
-		return null;
-	}
-	// 비밀번호 암호화
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	// PersistentLogins 등록
-	@Bean
-	public PersistentTokenRepository persistentTokenRepository() {
-		return null;
-	}
+	/*
+	 * @Bean public AuthenticationManager authenticationManager(HttpSecurity http,
+	 * BCryptPasswordEncoder passwordEncoder) throws Exception { return null; }
+	 * 
+	 * @Bean public JdbcUserDetailsManager jdbcUserDetailsManager() { return null; }
+	 * // 비밀번호 암호화
+	 * 
+	 * @Bean public BCryptPasswordEncoder passwordEncoder() { return new
+	 * BCryptPasswordEncoder(); } // PersistentLogins 등록
+	 * 
+	 * @Bean public PersistentTokenRepository persistentTokenRepository() { return
+	 * null; }
+	 */
 }
