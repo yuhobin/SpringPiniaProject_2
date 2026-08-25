@@ -50,4 +50,5 @@ public class RouterController {
 		 model.addAttribute("main_html", "member/login");
 		 return "main/main";
 	 }
+	
 }
