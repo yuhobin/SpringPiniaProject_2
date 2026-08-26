@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -13,6 +15,10 @@ h3 {
 	text-align: center;
 }
 </style>
+<script>
+const SESSION_ID=/*[[${session.userid}]]*/ ''
+const BOARDNO=/*[[${no}]]*/ 0
+</script>
 </head>
 <body>
 	<div class="container">
@@ -34,7 +40,7 @@ h3 {
 					</tr>
 					<tr>
 						<th width="20%" class="text-center success">제목</th>
-						<td colspan="3" class="text-center">[[${vo.subject}]]</td>
+						<td colspan="3" class="text-left">[[${vo.subject}]]</td>
 					</tr>
 					<tr>
 						<td colspan="4" class="text-left" valign="top" height="200">
@@ -51,6 +57,43 @@ h3 {
 				</tbody>
 			</table>
 		</div>
+		<div class="row" style="margin-top: 20px" id="comment">
+			<h3>댓글</h3>
+			<table class="table" v-if="store.count==0">
+				<tbody>
+					<tr>
+						<td class="text-center">
+							<h3>댓글이 없습니다</h3>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="table" v-else>
+				<tbody>
+					<tr>
+						<td class="text-center">
+							<h3>댓글이 있습니다</h3>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="table" sec:authorize="isAuthenticated()">
+				<tbody>
+					<tr>
+						<td class="text-center">
+							<textarea rows="4" cols="70" style="float: left;"
+								ref="msgRef" v-model="store.msg"
+							></textarea>
+							<button type="button" class="btn-primary" 
+							style="width: 70px; height: 87px; float: left;">댓글</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
+	<script src="/vue/axios.js"></script>
+	<script src="/vue/comment/boardStore.js"></script>
+	<script src="/vue/comment/boardView.js"></script>
 </body>
 </html>
