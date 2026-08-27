@@ -34,4 +34,5 @@ public class BoardServiceImpl {
 	public void save(BootBoard vo) {
 		bDao.save(vo);
 	}
+	
 }

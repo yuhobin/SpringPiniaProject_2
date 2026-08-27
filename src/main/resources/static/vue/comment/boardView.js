@@ -1,4 +1,4 @@
-const {createApp, onMounted, ref} = Vue
+const {createApp, onMounted, onUnmounted, ref} = Vue
 		const {createPinia} = Pinia
 		const commentApp = createApp({
 			setup(){
@@ -9,6 +9,10 @@ const {createApp, onMounted, ref} = Vue
 				onMounted(()=>{
 					store.sessionId=SESSION_ID
 					store.boardCommentListData(BOARDNO)
+					store.connect(SESSION_ID)
+				})
+				onUnmounted(()=>{
+					store.disConnect()
 				})
 				return {
 					store,

@@ -3,8 +3,7 @@ package com.sist.web.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
-import com.sist.web.vo.CommentVO;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
