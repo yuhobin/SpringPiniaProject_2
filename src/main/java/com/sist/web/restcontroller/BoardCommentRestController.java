@@ -16,6 +16,7 @@ import com.sist.web.vo.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
+import com.sist.web.kafka.NoticeProducer;
 import com.sist.web.mapper.*;
 
 @RestController
@@ -24,6 +25,7 @@ public class BoardCommentRestController {
 	private final BoardCommentMapper bMapper;
 	// => insert/update/delete => 화면 데이터 갱신
 	private final SimpMessagingTemplate template;
+	private final NoticeProducer noticeProducer;
 	public Map commentListData(int page, int board_no) {
 		Map map=new HashMap();
 		int start=(page*10)-10;
@@ -108,11 +110,13 @@ public class BoardCommentRestController {
 			
 			if(!pvo.getId().equals(vo.getId())) {
 				
-				template.convertAndSend(
+				/*template.convertAndSend(
 						"/sub/notice/"+pvo.getId(),
-						"[⏰댓글 알람]"+vo.getId()+"님이 댓글을 달았습니다!!"
+						"[⏰댓글 알림]"+vo.getId()+"님이 댓글을 달았습니다!!"
 				);
-				System.out.println("알림 전송 완료");
+				System.out.println("알림 전송 완료");*/
+				ChatMessage notice=new ChatMessage(vo.getId(), pvo.getId(), "[⏰댓글 알림]"+vo.getId()+"님이 댓글을 달았습니다!!");
+				noticeProducer.sendNotice(notice);
 			}
 			
 			map=commentListData(vo.getPage(), vo.getBoard_no());
